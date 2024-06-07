@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      if (window.Worker) {
+        var worker = new Worker("worker.js");
+        var message = {
+          addThis: {
+            num1: 5,
+            num2: 10,
+          },
+        };
+
+        worker.postMessage(message);
+        worker.onmessage = function (e) {
+          console.log(e.data.result);
+        };
+      } else {
+        console.log("Web Workers are not supported in this environment.");
+      }
+    </script>
+  </body>
+</html>
